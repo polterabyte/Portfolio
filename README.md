@@ -1,7 +1,7 @@
-# Portfolio
+# Мои этюды
 
 ## Оглавление
-- [PhoneBookReadme] Телефонная книга
+- [Телефонная книга][PhoneBookReadme] 
 
 
 

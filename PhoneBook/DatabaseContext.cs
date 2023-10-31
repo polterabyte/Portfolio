@@ -8,24 +8,20 @@ namespace PhoneBook;
 
 public sealed class DatabaseContext : DbContext
 {
-    private static string _dbPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "phone-book.db");
+    private const string DB_NAME = "phone-book";
     public DbSet<Contact> Contact { get; set; } = null!;
     public DbSet<Company> Company { get; set; } = null!;
 
-    private readonly bool _useSQLite;
+    private readonly DataBaseEnum _usedDb;
 
-    public DatabaseContext(bool useSQLite)
+    public DatabaseContext(DataBaseEnum usedDb)
     {
-        _useSQLite = useSQLite;
-
-        if (System.IO.Path.Exists(_dbPath)) return;
-        
-        Database.EnsureDeleted();
+        _usedDb = usedDb;
         Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
+    {        
         var oracele = new Company() {Id  = 1, Name = "Oracle" };
         var microsoft = new Company() {Id  = 2,  Name = "Microsoft" };
         var nokia = new Company() {Id  = 3,  Name = "Nokia" };
@@ -52,11 +48,22 @@ public sealed class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (_useSQLite)
-            optionsBuilder.UseSqlite();
-        else
-            optionsBuilder.UseNpgsql();
-        
-        optionsBuilder.UseSqlite("Filename=phone-book.db");
+        switch (_usedDb)
+        {
+            case DataBaseEnum.SQLITE:
+                optionsBuilder.UseSqlite($"Filename={DB_NAME}.db");
+
+                break;
+            case DataBaseEnum.NPGSQL:
+                optionsBuilder.UseNpgsql();
+
+                break;
+            case DataBaseEnum.MONGO:
+                optionsBuilder.UseMongoDB("", DB_NAME);
+
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 }

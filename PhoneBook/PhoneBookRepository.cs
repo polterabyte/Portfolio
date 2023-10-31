@@ -16,9 +16,9 @@ namespace PhoneBook
         public ObservableCollection<Contact> Contacts { get; private set; }
 
 
-        public PhoneBookRepository(bool useSQLite)
+        public PhoneBookRepository(DataBaseEnum usedDb)
         {
-            _db = new DatabaseContext(useSQLite);
+            _db = new DatabaseContext(usedDb);
             _db.Database.EnsureCreated();
 
             Companies = _db.Company.Local.ToObservableCollection();

@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Postgress" HorizontalAlignment="Left" Margin="310,0,0,0" VerticalAlignment="Center" Height="72" Width="85" Click="UsePostgreSQL_Click"/>
-        <Button Content="SQLite" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Center" Height="72" Width="85" Click="UseSQLite_Click"/>
+        <Button Content="Postgres" HorizontalAlignment="Left" Margin="265,0,0,0" VerticalAlignment="Center" Height="72" Width="85" Click="UsePostgreSQL_Click"/>
+        <Button Content="SQLite" HorizontalAlignment="Left" Margin="355,0,0,0" VerticalAlignment="Center" Height="72" Width="85" Click="UseSQLite_Click"/>
+        <Button Content="MongoDB" HorizontalAlignment="Left" Margin="445,0,0,0" VerticalAlignment="Center" Height="72" Width="85" Click="UseMongoDB_Click"/>
     </Grid>
 </Window>

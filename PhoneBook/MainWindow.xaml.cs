@@ -31,17 +31,21 @@ namespace PhoneBook
 
         private void UsePostgreSQL_Click(object sender, RoutedEventArgs e)
         {
-            ShowPhoneBook(false);
+            ShowPhoneBook(DataBaseEnum.NPGSQL);
         }
 
         private void UseSQLite_Click(object sender, RoutedEventArgs e)
         {
-            ShowPhoneBook(true);
+            ShowPhoneBook(DataBaseEnum.SQLITE);
+        }        
+        private void UseMongoDB_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPhoneBook(DataBaseEnum.MONGO);
         }
 
-        private void ShowPhoneBook(bool useSQLite)
+        private void ShowPhoneBook(DataBaseEnum usedDb)
         {
-            var phoneBookView = new PhoneBookView(new PhoneBookRepository(useSQLite))
+            var phoneBookView = new PhoneBookView(new PhoneBookRepository(usedDb))
             {
                 Owner = this
             };
